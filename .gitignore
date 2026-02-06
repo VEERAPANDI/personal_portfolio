@@ -1,0 +1,8 @@
+# Root
+package-lock.json
+/node_modules
+
+# Server
+/server/node_modules
+/server/package-lock.json
+/server/.env
