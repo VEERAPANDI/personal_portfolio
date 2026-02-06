@@ -20,7 +20,7 @@ const Navbar = () => {
             <div className="container nav-container">
                 <div className="nav-center-wrapper">
                     <Link to="/" className="nav-logo" onClick={() => setIsOpen(false)}>
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" alt="VP" className="nav-logo-img" />
+                        <img src="/assets/profile1.png" alt="VP" className="nav-logo-img" />
                         <span>VP</span>
                     </Link>
 
