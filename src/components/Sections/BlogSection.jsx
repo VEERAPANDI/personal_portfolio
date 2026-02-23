@@ -8,7 +8,7 @@ const BlogSection = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/blog')
+        fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/blog`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) {

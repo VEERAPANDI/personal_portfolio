@@ -5,7 +5,7 @@ const Hero = () => {
     const handleResumeDownload = async () => {
         try {
             // Track the download
-            await fetch('http://localhost:5000/api/resume/track', {
+            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/resume/track`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

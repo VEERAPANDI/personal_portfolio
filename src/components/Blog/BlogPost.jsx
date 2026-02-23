@@ -12,7 +12,7 @@ const BlogPost = () => {
         console.log('BlogPost mounted, ID:', id);
         if (id) {
             // Now using the getById endpoint which also increments visits
-            fetch(`http://localhost:5000/api/blog/${id}`)
+            fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/blog/${id}`)
                 .then(res => {
                     console.log('Fetch response status:', res.status);
                     if (!res.ok) throw new Error('Post not found');

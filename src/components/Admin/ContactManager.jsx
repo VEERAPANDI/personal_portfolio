@@ -16,7 +16,7 @@ const ContactManager = () => {
 
     const fetchContacts = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/contact');
+            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact`);
             const data = await response.json();
             setContacts(data);
             setLoading(false);
@@ -28,7 +28,7 @@ const ContactManager = () => {
 
     const toggleRead = async (id) => {
         try {
-            await fetch(`http://localhost:5000/api/contact/${id}/read`, {
+            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact/${id}/read`, {
                 method: 'PATCH',
             });
             fetchContacts();
@@ -41,7 +41,7 @@ const ContactManager = () => {
         if (!window.confirm('Are you sure you want to delete this contact?')) return;
 
         try {
-            await fetch(`http://localhost:5000/api/contact/${id}`, {
+            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact/${id}`, {
                 method: 'DELETE',
             });
             fetchContacts();

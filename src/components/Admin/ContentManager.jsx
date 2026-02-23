@@ -28,7 +28,7 @@ const ContentManager = ({ title, endpoint, fields }) => {
 
     const fetchItems = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/${endpoint}?admin=true`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}?admin=true`);
             const data = await res.json();
             setItems(data);
         } catch (err) {
@@ -40,8 +40,8 @@ const ContentManager = ({ title, endpoint, fields }) => {
         e.preventDefault();
         const method = editingId ? 'PUT' : 'POST';
         const url = editingId
-            ? `http://localhost:5000/api/${endpoint}/${editingId}`
-            : `http://localhost:5000/api/${endpoint}`;
+            ? `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}/${editingId}`
+            : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}`;
 
         try {
             console.log('Submitting form data:', formData);
@@ -95,7 +95,7 @@ const ContentManager = ({ title, endpoint, fields }) => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure?')) return;
         try {
-            await fetch(`http://localhost:5000/api/${endpoint}/${id}`, { method: 'DELETE' });
+            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}/${id}`, { method: 'DELETE' });
             fetchItems();
         } catch (err) {
             console.error('Failed to delete item', err);
