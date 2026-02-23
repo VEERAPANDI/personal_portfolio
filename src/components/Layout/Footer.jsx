@@ -9,7 +9,7 @@ const Footer = () => {
 
     const handleResumeDownload = async () => {
         try {
-            await fetch('http://localhost:5000/api/resume/track', {
+            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/resume/track`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ source: 'footer' }),
@@ -25,7 +25,7 @@ const Footer = () => {
     const handleNewsletterSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/api/newsletter/subscribe', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/newsletter/subscribe`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: newsletterName, email: newsletterEmail }),

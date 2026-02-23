@@ -14,7 +14,7 @@ const NewsletterManager = () => {
 
     const fetchSubscriptions = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/newsletter');
+            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/newsletter`);
             const data = await response.json();
             setSubscriptions(data);
             setLoading(false);
@@ -26,7 +26,7 @@ const NewsletterManager = () => {
 
     const toggleActive = async (id) => {
         try {
-            await fetch(`http://localhost:5000/api/newsletter/${id}/toggle`, {
+            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/newsletter/${id}/toggle`, {
                 method: 'PATCH',
             });
             fetchSubscriptions();
@@ -39,7 +39,7 @@ const NewsletterManager = () => {
         if (!window.confirm('Are you sure you want to delete this subscription?')) return;
 
         try {
-            await fetch(`http://localhost:5000/api/newsletter/${id}`, {
+            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/newsletter/${id}`, {
                 method: 'DELETE',
             });
             fetchSubscriptions();
