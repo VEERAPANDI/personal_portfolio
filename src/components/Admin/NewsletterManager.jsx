@@ -78,8 +78,8 @@ const NewsletterManager = () => {
                 .map(row => row.join(','))
                 .join('\n');
 
-            // Create blob
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            // Create blob with UTF-8 BOM
+            const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8' });
             const url = URL.createObjectURL(blob);
 
             // Create download link
@@ -95,7 +95,7 @@ const NewsletterManager = () => {
             setTimeout(() => {
                 document.body.removeChild(link);
                 URL.revokeObjectURL(url);
-            }, 250);
+            }, 1000);
 
             console.log('CSV export initiated');
         } catch (error) {
