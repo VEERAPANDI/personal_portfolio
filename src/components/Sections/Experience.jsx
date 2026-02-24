@@ -1,8 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './Sections.css';
 
 const Experience = () => {
     const [experiences, setExperiences] = useState([]);
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
+
+    // Animate the height of the vertical line
+    const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
     useEffect(() => {
         const fetchExperience = async () => {
@@ -27,10 +36,32 @@ const Experience = () => {
     return (
         <section id="experience" className="section-padding">
             <div className="container">
-                <h2 className="section-title">Professional Journey</h2>
-                <div className="timeline">
+                <motion.h2
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.6 }}
+                    className="section-title"
+                >
+                    Professional Journey
+                </motion.h2>
+
+                <div className="timeline" ref={containerRef}>
+                    {/* Animated vertical line */}
+                    <motion.div
+                        className="timeline-animated-line"
+                        style={{ height: lineHeight }}
+                    />
+
                     {experiences.map((exp, index) => (
-                        <div key={exp._id} className="timeline-item">
+                        <motion.div
+                            key={exp._id}
+                            className="timeline-item"
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.6, delay: index * 0.2 }}
+                        >
                             <div className="timeline-dot"></div>
                             <div className="timeline-content glass-panel">
                                 <div className="timeline-header">
@@ -44,7 +75,7 @@ const Experience = () => {
                                 </div>
                                 <p className="timeline-description">{exp.description}</p>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                     {experiences.length === 0 && (
                         <div className="no-data-placeholder">

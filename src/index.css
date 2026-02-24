@@ -4,10 +4,11 @@
   --bg-secondary: #121212;
   --text-primary: #ffffff;
   --text-secondary: #a0a0a0;
-  --accent-primary: #646cff; /* Example Vivid Blue/Violet */
+  --accent-primary: #646cff;
+  /* Example Vivid Blue/Violet */
   --accent-secondary: #535bf2;
   --accent-glow: rgba(100, 108, 255, 0.5);
-  
+
   /* Glassmorphism */
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
@@ -56,7 +57,7 @@ ul {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--spacing-lg);
 }
 
 .glass-panel {
@@ -65,4 +66,15 @@ ul {
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-lg: 1rem;
+    --spacing-xl: 2rem;
+  }
+
+  .container {
+    padding: 0 var(--spacing-md);
+  }
 }

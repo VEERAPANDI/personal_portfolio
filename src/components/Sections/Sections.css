@@ -183,59 +183,38 @@
     margin-bottom: 0.5rem;
 }
 
-/* Skills Marquee Styles */
-.skills-marquee-vertical-container {
-    height: 400px;
-    overflow: hidden;
-    position: relative;
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
-.skills-marquee-vertical {
-    display: flex;
-    flex-direction: column;
+/* Skills Grid Styles */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 2rem;
-    animation: scrollVertical 20s linear infinite;
+    margin-top: 3rem;
 }
 
-.skills-marquee-vertical:hover {
-    animation-play-state: paused;
-}
-
-.skill-logo-card {
+.skill-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
     border-radius: 12px;
+    background: var(--bg-secondary);
     border: 1px solid var(--glass-border);
-    width: 120px;
-    transition: transform 0.3s ease;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.skill-logo-card:hover {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.skill-logo-card img {
-    width: 50px;
-    height: 50px;
+.skill-logo {
+    width: 60px;
+    height: 60px;
     object-fit: contain;
 }
 
-@keyframes scrollVertical {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-50%);
-    }
+.skill-name {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
 }
 
 /* Portfolio Styles */
@@ -292,6 +271,16 @@
     left: 20px;
 }
 
+.timeline-animated-line {
+    position: absolute;
+    width: 2px;
+    background: var(--accent-primary);
+    top: 0;
+    left: 20px;
+    z-index: 1;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
 .timeline-item {
     position: relative;
     margin-bottom: 3rem;
@@ -319,6 +308,32 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .timeline::after {
+        left: 10px;
+    }
+
+    .timeline-animated-line {
+        left: 10px;
+    }
+
+    .timeline-item {
+        padding-left: 40px;
+    }
+
+    .timeline-dot {
+        left: 3px;
+    }
+
+    .timeline-header {
+        flex-direction: column;
+    }
+
+    .timeline-content {
+        padding: 1.5rem;
+    }
 }
 
 .timeline-header h3 {
