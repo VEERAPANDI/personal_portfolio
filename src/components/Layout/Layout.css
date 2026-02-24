@@ -158,6 +158,26 @@
         justify-content: space-between;
         width: 100%;
     }
+
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+        gap: 3rem !important;
+    }
+
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-social-wrapper {
+        text-align: center !important;
+    }
+
+    .social-links {
+        justify-content: center !important;
+    }
 }
 
 /* Admin UI Refinements */

@@ -20,39 +20,53 @@ import NewsletterManager from './components/Admin/NewsletterManager'
 import ContactManager from './components/Admin/ContactManager'
 import ResumeDownloadManager from './components/Admin/ResumeDownloadManager'
 
+import PageTransition from './components/Layout/PageTransition'
+import { AnimatePresence } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
+
+function AnimatedRoutes() {
+    const location = useLocation();
+
+    return (
+        <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+                <Route path="/" element={
+                    <PageTransition>
+                        <Hero />
+                        <About />
+                        <Skills />
+                        <Experience />
+                        <Portfolio />
+                        <BlogSection />
+                        <Newsletter />
+                        <Contact />
+                    </PageTransition>
+                } />
+                <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
+                <Route path="/blog/:id" element={<PageTransition><BlogPost /></PageTransition>} />
+
+                {/* Admin Routes */}
+                <Route path="/admin" element={<PageTransition><Login /></PageTransition>} />
+                <Route path="/admin/dashboard" element={<PageTransition><Dashboard /></PageTransition>} />
+                <Route path="/admin/projects" element={<PageTransition><ProjectManager /></PageTransition>} />
+                <Route path="/admin/skills" element={<PageTransition><SkillManager /></PageTransition>} />
+                <Route path="/admin/experience" element={<PageTransition><ExperienceManager /></PageTransition>} />
+                <Route path="/admin/blogs" element={<PageTransition><BlogManager /></PageTransition>} />
+                <Route path="/admin/newsletter" element={<PageTransition><NewsletterManager /></PageTransition>} />
+                <Route path="/admin/contacts" element={<PageTransition><ContactManager /></PageTransition>} />
+                <Route path="/admin/resume-downloads" element={<PageTransition><ResumeDownloadManager /></PageTransition>} />
+            </Routes>
+        </AnimatePresence>
+    );
+}
+
 function App() {
     return (
         <Router>
             <div className="app-container">
                 <Navbar />
                 <main>
-                    <Routes>
-                        <Route path="/" element={
-                            <>
-                                <Hero />
-                                <About />
-                                <Skills />
-                                <Experience />
-                                <Portfolio />
-                                <BlogSection />
-                                <Newsletter />
-                                <Contact />
-                            </>
-                        } />
-                        <Route path="/blog" element={<BlogPage />} />
-                        <Route path="/blog/:id" element={<BlogPost />} />
-
-                        {/* Admin Routes */}
-                        <Route path="/admin" element={<Login />} />
-                        <Route path="/admin/dashboard" element={<Dashboard />} />
-                        <Route path="/admin/projects" element={<ProjectManager />} />
-                        <Route path="/admin/skills" element={<SkillManager />} />
-                        <Route path="/admin/experience" element={<ExperienceManager />} />
-                        <Route path="/admin/blogs" element={<BlogManager />} />
-                        <Route path="/admin/newsletter" element={<NewsletterManager />} />
-                        <Route path="/admin/contacts" element={<ContactManager />} />
-                        <Route path="/admin/resume-downloads" element={<ResumeDownloadManager />} />
-                    </Routes>
+                    <AnimatedRoutes />
                 </main>
                 <Footer />
                 <AgentSystem />

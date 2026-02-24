@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import './Sections.css';
 
 const Skills = () => {
@@ -8,82 +8,77 @@ const Skills = () => {
         { name: 'HTML', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg' },
         { name: 'CSS', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg' },
         { name: 'JS', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg' },
-        { name: 'Node js', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg' },
-        { name: 'React js', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg' },
-        { name: 'next js', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg' },
-        { name: 'mysql', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg' },
-        { name: 'redis', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg' },
-        { name: 'mongo db', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg' },
-        { name: 'pgsql', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg' }
+        { name: 'Node.js', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg' },
+        { name: 'React', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg' },
+        { name: 'Next.js', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg' },
+        { name: 'MySQL', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg' },
+        { name: 'Redis', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg' },
+        { name: 'MongoDB', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg' },
+        { name: 'PostgreSQL', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg' }
     ];
 
-    const [skills, setSkills] = useState(defaultLogos);
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [skills] = useState(defaultLogos);
 
-    const scroll = (direction) => {
-        const wrapper = document.getElementById('skills-slider-wrapper');
-        if (wrapper) {
-            const scrollAmount = wrapper.clientWidth;
-            wrapper.scrollBy({
-                left: direction === 'left' ? -scrollAmount : scrollAmount,
-                behavior: 'smooth'
-            });
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
         }
     };
 
-    const handleScroll = (e) => {
-        const scrollLeft = e.target.scrollLeft;
-        const width = e.target.clientWidth;
-        const index = Math.round(scrollLeft / width);
-        setActiveIndex(index);
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { type: 'spring', stiffness: 100 }
+        }
     };
 
     return (
         <section id="skill" className="section-padding">
             <div className="container">
-                <h2 className="section-title">Technical Expertise</h2>
-                <div className="slider-container">
-                    <button className="slider-arrow left" onClick={() => scroll('left')}>
-                        <ChevronLeft size={20} />
-                    </button>
+                <motion.h2
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.6 }}
+                    className="section-title"
+                >
+                    Technical Expertise
+                </motion.h2>
 
-                    <div
-                        id="skills-slider-wrapper"
-                        className="slider-wrapper"
-                        onScroll={handleScroll}
-                    >
-                        {skills.map((skill, index) => (
-                            <div key={index} className="slider-item">
-                                <div className="modern-card" style={{ height: '180px' }}>
-                                    <div className="modern-card-content">
-                                        <h3>{skill.name}</h3>
-                                        <p>Expertise in {skill.name} development.</p>
-                                        <button className="btn-join">Learn More</button>
-                                    </div>
-                                    <img
-                                        src={skill.url}
-                                        alt={skill.name}
-                                        className="modern-card-image"
-                                        style={{ width: '60px', height: '60px' }}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <button className="slider-arrow right" onClick={() => scroll('right')}>
-                        <ChevronRight size={20} />
-                    </button>
-
-                    <div className="slider-dots">
-                        {Array.from({ length: Math.ceil(skills.length / 3) || 1 }).map((_, index) => (
-                            <div
-                                key={index}
-                                className={`dot ${activeIndex === index ? 'active' : ''}`}
-                            ></div>
-                        ))}
-                    </div>
-                </div>
+                <motion.div
+                    className="skills-grid"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                >
+                    {skills.map((skill, index) => (
+                        <motion.div
+                            key={index}
+                            variants={itemVariants}
+                            whileHover={{
+                                scale: 1.05,
+                                translateY: -5,
+                                boxShadow: "0 10px 30px rgba(100, 108, 255, 0.2)"
+                            }}
+                            className="skill-card glass-panel"
+                        >
+                            <img
+                                src={skill.url}
+                                alt={skill.name}
+                                className="skill-logo"
+                                loading="lazy"
+                            />
+                            <h3 className="skill-name">{skill.name}</h3>
+                        </motion.div>
+                    ))}
+                </motion.div>
             </div>
         </section>
     );
