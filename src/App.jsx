@@ -24,6 +24,17 @@ import ResumeDownloadManager from './components/Admin/ResumeDownloadManager'
 import PageTransition from './components/Layout/PageTransition'
 import { AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+
+function ScrollToTop() {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+}
 
 function AnimatedRoutes() {
     const location = useLocation();
@@ -69,6 +80,7 @@ function App() {
                 <meta name="description" content="Portfolio of Veerapandi Lakshmanan, a Senior Web Application Developer specializing in building scalable and interactive digital products." />
             </Helmet>
             <Router>
+                <ScrollToTop />
                 <div className="app-container">
                     <Navbar />
                     <main>
