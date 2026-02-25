@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HelmetProvider, Helmet } from 'react-helmet-async'
 import Navbar from './components/Layout/Navbar'
 import Footer from './components/Layout/Footer'
 import Hero from './components/Sections/Hero'
@@ -62,16 +63,22 @@ function AnimatedRoutes() {
 
 function App() {
     return (
-        <Router>
-            <div className="app-container">
-                <Navbar />
-                <main>
-                    <AnimatedRoutes />
-                </main>
-                <Footer />
-                <AgentSystem />
-            </div>
-        </Router>
+        <HelmetProvider>
+            <Helmet>
+                <title>Veerapandi Lakshmanan | Senior Web Application Developer</title>
+                <meta name="description" content="Portfolio of Veerapandi Lakshmanan, a Senior Web Application Developer specializing in building scalable and interactive digital products." />
+            </Helmet>
+            <Router>
+                <div className="app-container">
+                    <Navbar />
+                    <main>
+                        <AnimatedRoutes />
+                    </main>
+                    <Footer />
+                    <AgentSystem />
+                </div>
+            </Router>
+        </HelmetProvider>
     )
 }
 
