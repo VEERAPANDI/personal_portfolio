@@ -20,8 +20,11 @@ const Navbar = () => {
             <div className="container nav-container">
                 <div className="nav-center-wrapper">
                     <Link to="/" className="nav-logo" onClick={() => setIsOpen(false)}>
-                        <img src="/assets/profile1.png" alt="VP" className="nav-logo-img" />
-                        <span>VP</span>
+                        <div className="dev-logo-container">
+                            <span className="dev-logo-bracket">&lt;</span>
+                            <span className="dev-logo-text">vp</span>
+                            <span className="dev-logo-bracket">/&gt;</span>
+                        </div>
                     </Link>
 
                     <div className={`nav-links ${isOpen ? 'active' : ''}`}>

@@ -57,6 +57,28 @@
     color: var(--accent-primary);
 }
 
+.dev-logo-container {
+    display: flex;
+    align-items: center;
+    font-family: monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.dev-logo-container:hover {
+    transform: scale(1.05);
+}
+
+.dev-logo-bracket {
+    color: var(--text-secondary);
+}
+
+.dev-logo-text {
+    color: var(--accent-primary);
+    margin: 0 0.1rem;
+}
+
 .nav-links {
     display: flex;
     gap: 2rem;

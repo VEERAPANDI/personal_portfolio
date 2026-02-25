@@ -47,7 +47,11 @@ const Footer = () => {
             <div className="container">
                 <div className="footer-content" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '4rem' }}>
                     <div className="footer-brand">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" alt="VP" style={{ width: '50px', height: '50px', borderRadius: '50%', marginBottom: '1rem', objectFit: 'cover', border: '2px solid var(--accent-primary)' }} />
+                        <div className="footer-dev-logo" style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.2rem', fontSize: '2rem', fontWeight: 'bold' }}>
+                            <span style={{ color: 'var(--text-secondary)' }}>&lt;</span>
+                            <span style={{ color: 'var(--accent-primary)' }}>Veerapandi</span>
+                            <span style={{ color: 'var(--text-secondary)' }}>/&gt;</span>
+                        </div>
                         <h3>Veerapandi Lakshmanan</h3>
                         <p>Senior Web Developer building intelligent solutions.</p>
                         <button onClick={handleResumeDownload} className="btn-secondary" style={{ marginTop: '1.5rem', display: 'inline-block' }}>Download Resume</button>

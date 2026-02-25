@@ -1,4 +1,5 @@
 import React from 'react';
+import HeroTerminal from './HeroTerminal';
 import './Sections.css';
 
 const Hero = () => {
@@ -36,7 +37,7 @@ const Hero = () => {
                 </div>
                 <div className="hero-visual">
                     <div className="glow-orb"></div>
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?bg=transparent&auto=format&fit=crop&q=80&w=400" alt="VP Profile" className="hero-image" />
+                    <HeroTerminal />
                 </div>
             </div>
         </section>
