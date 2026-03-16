@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Newsletter } = require('../models');
+const authMiddleware = require('../middleware/authMiddleware');
 
 // Subscribe to newsletter
 router.post('/subscribe', async (req, res) => {
@@ -27,7 +28,7 @@ router.post('/subscribe', async (req, res) => {
 });
 
 // Get all subscriptions (admin only)
-router.get('/', async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
     try {
         const subscriptions = await Newsletter.find().sort({ createdAt: -1 });
         res.json(subscriptions);
@@ -37,7 +38,7 @@ router.get('/', async (req, res) => {
 });
 
 // Toggle active status
-router.patch('/:id/toggle', async (req, res) => {
+router.patch('/:id/toggle', authMiddleware, async (req, res) => {
     try {
         const subscription = await Newsletter.findById(req.params.id);
         if (!subscription) {
@@ -54,7 +55,7 @@ router.patch('/:id/toggle', async (req, res) => {
 });
 
 // Delete subscription
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authMiddleware, async (req, res) => {
     try {
         const subscription = await Newsletter.findByIdAndDelete(req.params.id);
         if (!subscription) {

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Contact } = require('../models');
+const authMiddleware = require('../middleware/authMiddleware');
 
 // Submit contact form
 router.post('/', async (req, res) => {
@@ -21,7 +22,7 @@ router.post('/', async (req, res) => {
 });
 
 // Get all contacts (admin only)
-router.get('/', async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
     try {
         const contacts = await Contact.find().sort({ createdAt: -1 });
         res.json(contacts);
@@ -31,7 +32,7 @@ router.get('/', async (req, res) => {
 });
 
 // Mark as read/unread
-router.patch('/:id/read', async (req, res) => {
+router.patch('/:id/read', authMiddleware, async (req, res) => {
     try {
         const contact = await Contact.findById(req.params.id);
         if (!contact) {
@@ -48,7 +49,7 @@ router.patch('/:id/read', async (req, res) => {
 });
 
 // Delete contact
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authMiddleware, async (req, res) => {
     try {
         const contact = await Contact.findByIdAndDelete(req.params.id);
         if (!contact) {
