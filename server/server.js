@@ -26,6 +26,7 @@ const sitemapRoutes = require('./routes/sitemapRoutes');
 const newsletterRoutes = require('./routes/newsletterRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const resumeRoutes = require('./routes/resumeRoutes');
+const agentRoutes = require('./routes/agentRoutes');
 
 app.use('/', sitemapRoutes); // Root level for /sitemap.xml
 app.use('/api/admin', adminRoutes);
@@ -37,6 +38,7 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/resume', resumeRoutes);
+app.use('/api/agent', agentRoutes);
 
 const PORT = process.env.PORT || 5000;
 
