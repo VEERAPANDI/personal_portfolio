@@ -57,9 +57,14 @@ const BlogPost = () => {
     const seoTitle = post.seo?.metaTitle || post.title;
     const seoDescription = post.seo?.metaDescription || post.excerpt;
     const seoKeywords = post.seo?.metaKeywords || post.tags?.join(', ') || '';
-    const ogImage = post.seo?.ogImage || `${siteUrl}/assets/og-image.png`;
+    // Use featured image for OG image if available, fallback to default
+    const ogImage = post.seo?.ogImage || post.featuredImage?.optimized_image_url || `${siteUrl}/assets/og-image.png`;
     const canonicalUrl = post.seo?.canonicalUrl || shareUrl;
     const robotsMeta = post.seo?.robotsMeta || 'index, follow';
+    
+    // Featured Image Configuration
+    const featuredImage = post.featuredImage;
+    const hasFeaturedImage = featuredImage?.optimized_image_url;
 
     // RAG Configuration for AI crawlers
     const ragEnabled = post.rag?.isEnabled !== false;
@@ -168,10 +173,49 @@ const BlogPost = () => {
                         </div>
                     </div>
 
+                    {/* Featured Image with SEO & Performance Optimizations */}
+                    {hasFeaturedImage && (
+                        <figure className="featured-image-container">
+                            <img
+                                src={featuredImage.optimized_image_url}
+                                alt={featuredImage.image_context_text || post.title}
+                                loading="lazy"
+                                width="800"
+                                height="450"
+                                className="featured-image"
+                                srcSet={`
+                                    ${featuredImage.optimized_image_url.replace('w=800', 'w=400')} 400w,
+                                    ${featuredImage.optimized_image_url.replace('w=800', 'w=800')} 800w
+                                `}
+                                sizes="(max-width: 768px) 100vw, 800px"
+                            />
+                            {/* RAG-optimized caption for AI context */}
+                            <figcaption className="image-caption">
+                                {featuredImage.image_context_text && (
+                                    <span className="image-context" data-rag-image-context={featuredImage.image_context_text}>
+                                        {featuredImage.image_context_text}
+                                    </span>
+                                )}
+                                {featuredImage.photographer && (
+                                    <span className="photographer-credit">
+                                        {' '}Photo by{' '}
+                                        <a 
+                                            href={featuredImage.photographer_url} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                        >
+                                            {featuredImage.photographer}
+                                        </a>
+                                        {' '}on Unsplash
+                                    </span>
+                                )}
+                            </figcaption>
+                        </figure>
+                    )}
+
                     <div className="article-content">
                         <p className="lead">{post.excerpt}</p>
                         <div dangerouslySetInnerHTML={{ __html: post.content }} />
-                        {/* Note: In a real app we would use a markdown renderer here, keeping it simple for now */}
                     </div>
 
                     <div className="article-footer">

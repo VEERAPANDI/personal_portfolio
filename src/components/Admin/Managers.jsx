@@ -43,33 +43,6 @@ export const SkillManager = () => (
     />
 );
 
-export const BlogManager = () => (
-    <ContentManager
-        title="Blog Posts"
-        endpoint="blog"
-        fields={[
-            { name: 'title', label: 'Title' },
-            { name: 'slug', label: 'Slug (URL friendly)' },
-            { name: 'excerpt', label: 'Excerpt', type: 'textarea' },
-            { name: 'image', label: 'Feature Image URL (or leave blank for AI)' },
-            { name: 'imageKeyword', label: 'AI Image Keyword (e.g. "coding", "robot")' },
-            { name: 'content', label: 'Content (Rich Text)', type: 'richtext' },
-            { name: 'tags', label: 'Tags (comma separated)' },
-            { name: 'isPublished', label: 'Published', type: 'checkbox' },
-            { name: 'readTime', label: 'Read Time' },
-            // SEO Configuration Fields
-            { name: 'seo.metaTitle', label: 'SEO Meta Title (optional, defaults to title)' },
-            { name: 'seo.metaDescription', label: 'SEO Meta Description (optional, defaults to excerpt)', type: 'textarea' },
-            { name: 'seo.metaKeywords', label: 'SEO Meta Keywords (optional, defaults to tags)' },
-            { name: 'seo.ogImage', label: 'SEO OG Image URL (optional)' },
-            { name: 'seo.canonicalUrl', label: 'Canonical URL (optional)' },
-            { name: 'seo.robotsMeta', label: 'Robots Meta (index, follow | noindex, nofollow)', type: 'select', options: ['index, follow', 'noindex, nofollow', 'index, nofollow', 'noindex, follow'] },
-            // RAG Configuration Fields
-            { name: 'rag.isEnabled', label: 'RAG Enabled (AI can index this content)', type: 'checkbox' },
-            { name: 'rag.priority', label: 'RAG Priority (1-10, higher = more important)', type: 'number' },
-            { name: 'rag.category', label: 'RAG Category (e.g., technical, tutorial, opinion)' },
-            { name: 'rag.contextWindow', label: 'RAG Context Window (token limit)', type: 'number' },
-            { name: 'rag.embeddingModel', label: 'Embedding Model (e.g., text-embedding-3-small)' }
-        ]}
-    />
-);
+import BlogManagerWithImagePicker from './BlogManager';
+
+export { BlogManagerWithImagePicker as BlogManager };

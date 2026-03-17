@@ -74,6 +74,112 @@ ul {
   border-radius: 12px;
 }
 
+/* Admin Form Styles */
+.admin-container {
+    padding-top: 100px;
+    min-height: 100vh;
+}
+
+.admin-form-container .form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.admin-form-container .form-section:last-of-type {
+    border-bottom: none;
+}
+
+.admin-form-container .form-section h4 {
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.admin-form-container .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.admin-form-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.admin-form-container input[type="text"],
+.admin-form-container input[type="number"],
+.admin-form-container input[type="date"],
+.admin-form-container textarea {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.admin-form-container input:focus,
+.admin-form-container textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.admin-form-container textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.admin-form-container input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+/* Quill Editor Styles */
+.quill-container .ql-toolbar {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--glass-border);
+    border-radius: 8px 8px 0 0;
+}
+
+.quill-container .ql-container {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: var(--glass-border);
+    border-radius: 0 0 8px 8px;
+    min-height: 200px;
+}
+
+.quill-container .ql-editor {
+    color: var(--text-primary);
+    font-size: 1rem;
+    min-height: 200px;
+}
+
+.quill-container .ql-editor.ql-blank::before {
+    color: var(--text-secondary);
+}
+
+.quill-container .ql-stroke {
+    stroke: var(--text-secondary);
+}
+
+.quill-container .ql-fill {
+    fill: var(--text-secondary);
+}
+
+.quill-container .ql-picker {
+    color: var(--text-secondary);
+}
+
+.quill-container .ql-picker-options {
+    background: var(--bg-secondary);
+    border-color: var(--glass-border);
+}
+
 @media (max-width: 768px) {
   :root {
     --spacing-lg: 1rem;
