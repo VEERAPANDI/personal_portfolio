@@ -73,7 +73,9 @@ const blogSchema = mongoose.Schema({
 const newsletterSchema = mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    isActive: { type: Boolean, default: true }
+    isActive: { type: Boolean, default: true },
+    status: { type: String, enum: ['active', 'unsubscribed'], default: 'active' },
+    unsubscribedAt: { type: Date }
 }, { timestamps: true });
 
 const contactSchema = mongoose.Schema({
