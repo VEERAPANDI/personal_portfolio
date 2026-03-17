@@ -45,7 +45,12 @@ const BlogManager = () => {
 
     const fetchItems = async () => {
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}?admin=true`);
+            const token = localStorage.getItem('adminToken');
+            const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}?admin=true`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             const data = await res.json();
             setItems(data);
         } catch (err) {
@@ -84,9 +89,13 @@ const BlogManager = () => {
                 dataToSave.seo = { ...dataToSave.seo, ogImage: dataToSave.featuredImage.optimized_image_url };
             }
 
+            const token = localStorage.getItem('adminToken');
             const res = await fetch(url, {
                 method,
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(dataToSave)
             });
             if (res.ok) {
@@ -145,7 +154,13 @@ const BlogManager = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure?')) return;
         try {
-            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}/${id}`, { method: 'DELETE' });
+            const token = localStorage.getItem('adminToken');
+            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}/${id}`, { 
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             fetchItems();
         } catch (err) {
             console.error('Failed to delete item', err);

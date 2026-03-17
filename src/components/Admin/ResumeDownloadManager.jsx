@@ -17,7 +17,12 @@ const ResumeDownloadManager = () => {
 
     const fetchDownloads = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/resume/downloads`);
+            const token = localStorage.getItem('adminToken');
+            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/resume/downloads`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             const data = await response.json();
             setDownloads(data.downloads);
             setStats(data.stats);

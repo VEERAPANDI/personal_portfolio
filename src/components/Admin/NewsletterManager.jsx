@@ -14,7 +14,12 @@ const NewsletterManager = () => {
 
     const fetchSubscriptions = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/newsletter`);
+            const token = localStorage.getItem('adminToken');
+            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/newsletter`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             const data = await response.json();
             setSubscriptions(data);
             setLoading(false);
@@ -26,8 +31,12 @@ const NewsletterManager = () => {
 
     const toggleActive = async (id) => {
         try {
+            const token = localStorage.getItem('adminToken');
             await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/newsletter/${id}/toggle`, {
                 method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
             fetchSubscriptions();
         } catch (err) {
@@ -39,8 +48,12 @@ const NewsletterManager = () => {
         if (!window.confirm('Are you sure you want to delete this subscription?')) return;
 
         try {
+            const token = localStorage.getItem('adminToken');
             await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/newsletter/${id}`, {
                 method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
             fetchSubscriptions();
         } catch (err) {
