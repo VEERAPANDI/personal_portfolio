@@ -41,7 +41,24 @@ const blogSchema = mongoose.Schema({
     tags: [{ type: String }],
     visits: { type: Number, default: 0 },
     author: { type: String, default: 'Admin' },
-    isPublished: { type: Boolean, default: true }
+    isPublished: { type: Boolean, default: true },
+    // SEO Configuration
+    seo: {
+        metaTitle: { type: String, default: '' },
+        metaDescription: { type: String, default: '' },
+        metaKeywords: { type: String, default: '' },
+        ogImage: { type: String, default: '' },
+        canonicalUrl: { type: String, default: '' },
+        robotsMeta: { type: String, default: 'index, follow' }
+    },
+    // RAG (Retrieval Augmented Generation) Configuration
+    rag: {
+        isEnabled: { type: Boolean, default: true },
+        priority: { type: Number, default: 5, min: 1, max: 10 },
+        category: { type: String, default: 'general' },
+        contextWindow: { type: Number, default: 2000 },
+        embeddingModel: { type: String, default: 'text-embedding-3-small' }
+    }
 }, { timestamps: true });
 
 const newsletterSchema = mongoose.Schema({

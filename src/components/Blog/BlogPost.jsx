@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Linkedin, Twitter, Share2, Facebook } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import './Blog.css';
 
 const BlogPost = () => {
@@ -22,9 +23,6 @@ const BlogPost = () => {
                     console.log('Fetched data:', data);
                     setPost(data);
                     setLoading(false);
-                    // Dynamic SEO
-                    document.title = `${data.title} | Personal Portfolio`;
-                    document.querySelector('meta[name="description"]')?.setAttribute('content', data.excerpt);
                 })
                 .catch(err => {
                     console.error('Fetch error:', err);
@@ -53,15 +51,109 @@ const BlogPost = () => {
     }
 
     const shareUrl = window.location.href;
+    const siteUrl = window.location.origin;
+
+    // SEO Configuration
+    const seoTitle = post.seo?.metaTitle || post.title;
+    const seoDescription = post.seo?.metaDescription || post.excerpt;
+    const seoKeywords = post.seo?.metaKeywords || post.tags?.join(', ') || '';
+    const ogImage = post.seo?.ogImage || `${siteUrl}/assets/og-image.png`;
+    const canonicalUrl = post.seo?.canonicalUrl || shareUrl;
+    const robotsMeta = post.seo?.robotsMeta || 'index, follow';
+
+    // RAG Configuration for AI crawlers
+    const ragEnabled = post.rag?.isEnabled !== false;
+    const ragPriority = post.rag?.priority || 5;
+    const ragCategory = post.rag?.category || 'general';
+
+    // Structured data for the blog post
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "description": post.excerpt,
+        "image": ogImage,
+        "author": {
+            "@type": "Person",
+            "name": post.author || "Veerapandi Lakshmanan"
+        },
+        "publisher": {
+            "@type": "Person",
+            "name": "Veerapandi Lakshmanan",
+            "logo": {
+                "@type": "ImageObject",
+                "url": `${siteUrl}/assets/og-image.png`
+            }
+        },
+        "datePublished": post.createdAt,
+        "dateModified": post.updatedAt || post.createdAt,
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": canonicalUrl
+        },
+        "keywords": post.tags?.join(', '),
+        "articleSection": ragCategory,
+        "wordCount": post.content?.split(/\s+/).length || 0
+    };
 
     return (
         <div className="blog-post-page section-padding">
+            <Helmet>
+                {/* Standard Meta Tags */}
+                <title>{seoTitle}</title>
+                <meta name="description" content={seoDescription} />
+                <meta name="keywords" content={seoKeywords} />
+                <meta name="author" content={post.author || "Veerapandi Lakshmanan"} />
+                <meta name="robots" content={robotsMeta} />
+                <link rel="canonical" href={canonicalUrl} />
+
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={canonicalUrl} />
+                <meta property="og:title" content={seoTitle} />
+                <meta property="og:description" content={seoDescription} />
+                <meta property="og:image" content={ogImage} />
+                <meta property="article:published_time" content={post.createdAt} />
+                <meta property="article:modified_time" content={post.updatedAt || post.createdAt} />
+                <meta property="article:author" content={post.author || "Veerapandi Lakshmanan"} />
+                {post.tags?.map(tag => (
+                    <meta key={tag} property="article:tag" content={tag} />
+                ))}
+
+                {/* Twitter */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:url" content={canonicalUrl} />
+                <meta name="twitter:title" content={seoTitle} />
+                <meta name="twitter:description" content={seoDescription} />
+                <meta name="twitter:image" content={ogImage} />
+
+                {/* AI Crawlers & RAG Configuration */}
+                <meta name="ai-content-ranking" content={ragPriority} />
+                <meta name="ai-content-category" content={ragCategory} />
+                <meta name="ai-content-enabled" content={ragEnabled ? "true" : "false"} />
+                
+                {/* Specific AI Crawlers */}
+                <meta name="googlebot" content={robotsMeta} />
+                <meta name="bingbot" content={robotsMeta} />
+                <meta name="anthropic-ai" content={ragEnabled ? "index" : "noindex"} />
+                <meta name="openai" content={ragEnabled ? "index" : "noindex"} />
+                <meta name="chatgpt" content={ragEnabled ? "index" : "noindex"} />
+                <meta name="perplexity" content={ragEnabled ? "index" : "noindex"} />
+                <meta name="cohere-ai" content={ragEnabled ? "index" : "noindex"} />
+                <meta name="google-extended" content={ragEnabled ? "index" : "noindex"} />
+
+                {/* Structured Data */}
+                <script type="application/ld+json">
+                    {JSON.stringify(articleSchema)}
+                </script>
+            </Helmet>
+
             <div className="container">
                 <Link to="/blog" className="back-link">
                     <ArrowLeft size={16} /> Back to Blog
                 </Link>
 
-                <article className="blog-full-article glass-panel">
+                <article className="blog-full-article glass-panel" data-rag-enabled={ragEnabled} data-rag-priority={ragPriority} data-rag-category={ragCategory}>
                     <div className="article-header">
                         <div className="blog-meta">
                             <span>{new Date(post.createdAt).toLocaleDateString()}</span>
