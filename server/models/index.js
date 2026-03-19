@@ -10,10 +10,19 @@ const skillSchema = mongoose.Schema({
 const projectSchema = mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
-    image: { type: String },
+    image: { type: String }, // Legacy field, kept for backward compatibility
     tags: [{ type: String }],
     link: { type: String },
-    githubLink: { type: String }
+    githubLink: { type: String },
+    // Featured Image with optimization (no SEO settings for projects)
+    featuredImage: {
+        optimized_image_url: { type: String, default: '' },
+        image_context_text: { type: String, default: '' },
+        original_url: { type: String, default: '' },
+        unsplash_id: { type: String, default: '' },
+        photographer: { type: String, default: '' },
+        photographer_url: { type: String, default: '' }
+    }
 }, { timestamps: true });
 
 const experienceSchema = mongoose.Schema({

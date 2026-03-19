@@ -1,19 +1,8 @@
 import React from 'react';
 import ContentManager from './ContentManager';
+import ProjectManagerWithImagePicker from './ProjectManager';
 
-export const ProjectManager = () => (
-    <ContentManager
-        title="Projects"
-        endpoint="projects"
-        fields={[
-            { name: 'title', label: 'Project Name' },
-            { name: 'description', label: 'Description', type: 'textarea' },
-            { name: 'image', label: 'Project Image URL' },
-            { name: 'link', label: 'Project Link' },
-            { name: 'tags', label: 'Technologies (comma separated)' }
-        ]}
-    />
-);
+export { ProjectManagerWithImagePicker as ProjectManager };
 
 export const ExperienceManager = () => (
     <ContentManager
