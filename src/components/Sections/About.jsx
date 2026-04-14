@@ -7,7 +7,7 @@ const About = () => {
             <div className="container about-container">
                 <div className="about-grid">
                     <div className="about-image glass-panel">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" alt="Veerapandi" style={{ width: '100%', borderRadius: '12px' }} />
+                        <img src="/assets/profile.png" alt="Veerapandi" style={{ width: '100%', borderRadius: '12px' }} />
                     </div>
                     <div className="about-content">
                         <h2 className="section-title">About Me</h2>
