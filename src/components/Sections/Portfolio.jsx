@@ -61,9 +61,9 @@ const Portfolio = () => {
                                     <div className="modern-card-content">
                                         <h3 style={{ fontSize: '1.2rem', marginBottom: '0.8rem' }}>{project.title}</h3>
                                         <p style={{ fontSize: '0.9rem', marginBottom: '1.2rem' }}>{project.description}</p>
-                                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-join">
+                                        {/* <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-join">
                                             Visit Project
-                                        </a>
+                                        </a> */}
                                     </div>
                                     <img
                                         src={project.featuredImage?.optimized_image_url || project.image || `https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400&sig=${project._id}`}
