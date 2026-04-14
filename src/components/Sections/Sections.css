@@ -539,14 +539,14 @@
     background: linear-gradient(145deg, #1a1a2e, #16213e);
     border-radius: 20px;
     padding: 1.5rem;
-    height: 250px;
     overflow: hidden;
     position: relative;
     display: flex;
-    flex-direction: row;
-    /* Horizontal layout: text left, image right */
-    justify-content: space-between;
-    min-height: 220px;
+    flex-direction: column;
+    /* Vertical layout: image top, text bottom */
+    justify-content: flex-start;
+    gap: 1.5rem;
+    height: 100%; /* Take full height of slider item */
 }
 
 .modern-card:hover {
@@ -560,26 +560,21 @@
     z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .modern-card-content h3 {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     margin-bottom: 0.5rem;
     color: white;
 }
 
 .modern-card-content p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #94a3b8;
-    margin-bottom: 1.5rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    line-height: 1.5;
     margin-bottom: 0;
-    /* Removing fixed bottom margin to allow flex spacing */
+    /* Full description visible */
 }
 
 .interactive-terminal .terminal-messages {
@@ -625,14 +620,15 @@
 }
 
 .modern-card-image {
-    width: 120px;
-    height: 120px;
+    width: 100%;
+    height: 200px;
     object-fit: cover;
     border-radius: 12px;
-    margin-left: 1.5rem;
+    margin-left: 0;
     z-index: 1;
     flex-shrink: 0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    order: -1; /* Puts the image at the top of the card */
 }
 
 .btn-join {
