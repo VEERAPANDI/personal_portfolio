@@ -66,9 +66,12 @@ const Portfolio = () => {
                                         </a>
                                     </div>
                                     <img
-                                        src={project.image || `https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400&sig=${project._id}`}
-                                        alt={project.title}
+                                        src={project.featuredImage?.optimized_image_url || project.image || `https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400&sig=${project._id}`}
+                                        alt={project.featuredImage?.image_context_text || project.title}
                                         className="modern-card-image"
+                                        loading="lazy"
+                                        width="400"
+                                        height="300"
                                     />
                                 </div>
                             </div>
