@@ -6,10 +6,24 @@ const authMiddleware = require('../middleware/authMiddleware');
 // Submit contact form
 router.post('/', async (req, res) => {
     try {
-        const { name, email, subject, message } = req.body;
+        const { name, email, subject, message, recaptchaToken } = req.body;
 
         if (!name || !email || !message) {
             return res.status(400).json({ message: 'Name, email, and message are required' });
+        }
+
+        // Verify reCAPTCHA if secret is set
+        if (process.env.RECAPTCHA_SECRET_KEY && process.env.RECAPTCHA_SECRET_KEY !== 'YOUR_RECAPTCHA_SECRET_KEY') {
+            if (!recaptchaToken) {
+                return res.status(400).json({ message: 'reCAPTCHA token is missing' });
+            }
+            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`;
+            const verifyRes = await fetch(verifyUrl, { method: 'POST' });
+            const verifyData = await verifyRes.json();
+
+            if (!verifyData.success || verifyData.score < 0.5) {
+                return res.status(403).json({ message: 'reCAPTCHA verification failed. Your action was flagged as spam.' });
+            }
         }
 
         const contact = new Contact({ name, email, subject, message });

@@ -21,6 +21,35 @@
       window.hljs = hljs;
     }
   </script>
+  <!-- Google Analytics snippet logic. Wrapped in a function for GDPR consent -->
+  <script>
+    window.loadGoogleAnalytics = function() {
+      if (window.gaLoaded) return;
+      const gaTrackingId = "%VITE_GA_TRACKING_ID%";
+      if (gaTrackingId && !gaTrackingId.startsWith('%')) {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', gaTrackingId);
+        window.gaLoaded = true;
+      }
+    };
+  </script>
+
+  <!-- Google reCAPTCHA v3 snippet -->
+  <script>
+    const recaptchaKey = "%VITE_RECAPTCHA_SITE_KEY%";
+    if (recaptchaKey && !recaptchaKey.startsWith('%')) {
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaKey}`;
+      document.head.appendChild(script);
+    }
+  </script>
 </head>
 
 <body>

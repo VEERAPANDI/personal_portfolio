@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 const connectDB = require('./config/db');
 
 dotenv.config();
@@ -17,9 +19,23 @@ initCronJobs();
 const app = express();
 
 // Middleware
+// Set security HTTP headers
 app.use(helmet());
-app.use(cors());
-app.use(express.json());
+
+// Enable CORS (Stricter for production, fallback to generic based on env if needed)
+app.use(cors({
+    origin: process.env.CLIENT_URL || '*',
+    credentials: true
+}));
+
+// Body parser, reading data from body into req.body
+app.use(express.json({ limit: '10kb' })); // limit body size
+
+// Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// Data sanitization against XSS
+app.use(xss());
 
 // Rate limiting
 const limiter = rateLimit({

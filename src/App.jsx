@@ -11,6 +11,7 @@ import Portfolio from './components/Sections/Portfolio'
 import BlogSection from './components/Sections/BlogSection'
 import Contact from './components/Sections/Contact'
 import Newsletter from './components/Sections/Newsletter'
+import NotFound from './components/Sections/NotFound'
 import AgentSystem from './components/Agent/AgentSystem'
 import BlogPage from './components/Blog/BlogPage'
 import BlogPost from './components/Blog/BlogPost'
@@ -27,6 +28,7 @@ import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
 import SEO from './components/Common/SEO'
+import CookieBanner from './components/Common/CookieBanner'
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -70,6 +72,9 @@ function AnimatedRoutes() {
                 <Route path="/admin/newsletter" element={<PageTransition><NewsletterManager /></PageTransition>} />
                 <Route path="/admin/contacts" element={<PageTransition><ContactManager /></PageTransition>} />
                 <Route path="/admin/resume-downloads" element={<PageTransition><ResumeDownloadManager /></PageTransition>} />
+
+                {/* 404 Catch All Route */}
+                <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
         </AnimatePresence>
     );
@@ -87,6 +92,7 @@ function App() {
                     </main>
                     <Footer />
                     <AgentSystem />
+                    <CookieBanner />
                 </div>
             </Router>
         </HelmetProvider>

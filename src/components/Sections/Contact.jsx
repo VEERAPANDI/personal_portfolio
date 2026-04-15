@@ -11,10 +11,22 @@ const Contact = () => {
         e.preventDefault();
         setStatus('sending');
         try {
+            let token = '';
+            if (window.grecaptcha && import.meta.env.VITE_RECAPTCHA_SITE_KEY && import.meta.env.VITE_RECAPTCHA_SITE_KEY !== 'YOUR_RECAPTCHA_SITE_KEY') {
+                token = await new Promise((resolve) => {
+                    window.grecaptcha.ready(async () => {
+                        const t = await window.grecaptcha.execute(import.meta.env.VITE_RECAPTCHA_SITE_KEY, { action: 'submit_contact' });
+                        resolve(t);
+                    });
+                });
+            }
+
+            const payload = { ...formData, recaptchaToken: token };
+
             const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(payload)
             });
             if (res.ok) {
                 setStatus('sent');
