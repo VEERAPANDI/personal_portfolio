@@ -18,6 +18,9 @@ initCronJobs();
 
 const app = express();
 
+// Trust proxy for Render deployment since it's behind a reverse proxy
+app.set('trust proxy', 1);
+
 // Middleware
 // Set security HTTP headers
 app.use(helmet());
