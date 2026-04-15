@@ -71,8 +71,8 @@ const BlogSection = () => {
                                         </Link>
                                     </div>
                                     <img
-                                        src={blog.image || `https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=400&sig=${blog._id}`}
-                                        alt={blog.title}
+                                        src={blog.featuredImage?.optimized_image_url?.replace('w=800', 'w=400') || blog.image || `https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=400&sig=${blog._id}`}
+                                        alt={blog.featuredImage?.image_context_text || blog.title}
                                         className="modern-card-image"
                                     />
                                 </div>

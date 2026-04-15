@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { ResumeDownload } = require('../models');
+const authMiddleware = require('../middleware/authMiddleware');
 
 // Track resume download
 router.post('/track', async (req, res) => {
@@ -30,7 +31,7 @@ router.post('/track', async (req, res) => {
 });
 
 // Get all download records (admin only)
-router.get('/downloads', async (req, res) => {
+router.get('/downloads', authMiddleware, async (req, res) => {
     try {
         const downloads = await ResumeDownload.find().sort({ createdAt: -1 });
 

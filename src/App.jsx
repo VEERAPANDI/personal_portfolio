@@ -11,6 +11,7 @@ import Portfolio from './components/Sections/Portfolio'
 import BlogSection from './components/Sections/BlogSection'
 import Contact from './components/Sections/Contact'
 import Newsletter from './components/Sections/Newsletter'
+import NotFound from './components/Sections/NotFound'
 import AgentSystem from './components/Agent/AgentSystem'
 import BlogPage from './components/Blog/BlogPage'
 import BlogPost from './components/Blog/BlogPost'
@@ -25,6 +26,9 @@ import PageTransition from './components/Layout/PageTransition'
 import { AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+
+import SEO from './components/Common/SEO'
+import CookieBanner from './components/Common/CookieBanner'
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -44,6 +48,7 @@ function AnimatedRoutes() {
             <Routes location={location} key={location.pathname}>
                 <Route path="/" element={
                     <PageTransition>
+                        <SEO />
                         <Hero />
                         <About />
                         <Skills />
@@ -54,8 +59,8 @@ function AnimatedRoutes() {
                         <Contact />
                     </PageTransition>
                 } />
-                <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
-                <Route path="/blog/:id" element={<PageTransition><BlogPost /></PageTransition>} />
+                <Route path="/blog" element={<PageTransition><SEO title="Blog | Veerapandi Lakshmanan" description="Read the latest articles on web development, AI, and software engineering by Veerapandi Lakshmanan." /><BlogPage /></PageTransition>} />
+                <Route path="/blog/:id" element={<PageTransition><SEO type="article" /><BlogPost /></PageTransition>} />
 
                 {/* Admin Routes */}
                 <Route path="/admin" element={<PageTransition><Login /></PageTransition>} />
@@ -67,6 +72,9 @@ function AnimatedRoutes() {
                 <Route path="/admin/newsletter" element={<PageTransition><NewsletterManager /></PageTransition>} />
                 <Route path="/admin/contacts" element={<PageTransition><ContactManager /></PageTransition>} />
                 <Route path="/admin/resume-downloads" element={<PageTransition><ResumeDownloadManager /></PageTransition>} />
+
+                {/* 404 Catch All Route */}
+                <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
         </AnimatePresence>
     );
@@ -75,10 +83,6 @@ function AnimatedRoutes() {
 function App() {
     return (
         <HelmetProvider>
-            <Helmet>
-                <title>Veerapandi Lakshmanan | Senior Web Application Developer</title>
-                <meta name="description" content="Portfolio of Veerapandi Lakshmanan, a Senior Web Application Developer specializing in building scalable and interactive digital products." />
-            </Helmet>
             <Router>
                 <ScrollToTop />
                 <div className="app-container">
@@ -88,6 +92,7 @@ function App() {
                     </main>
                     <Footer />
                     <AgentSystem />
+                    <CookieBanner />
                 </div>
             </Router>
         </HelmetProvider>

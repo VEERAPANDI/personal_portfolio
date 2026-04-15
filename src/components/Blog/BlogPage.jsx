@@ -20,6 +20,18 @@ const BlogPage = () => {
                 <div className="blog-grid">
                     {posts.map(post => (
                         <article key={post._id} className="blog-card glass-panel">
+                            {/* Featured Image Thumbnail */}
+                            {post.featuredImage?.optimized_image_url && (
+                                <Link to={`/blog/${post.slug}`} className="blog-card-image">
+                                    <img
+                                        src={post.featuredImage.optimized_image_url.replace('w=800', 'w=400')}
+                                        alt={post.featuredImage.image_context_text || post.title}
+                                        loading="lazy"
+                                        width="400"
+                                        height="225"
+                                    />
+                                </Link>
+                            )}
                             <div className="blog-content">
                                 <div className="blog-meta">
                                     <span>{new Date(post.createdAt).toLocaleDateString()}</span>

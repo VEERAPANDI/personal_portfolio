@@ -28,7 +28,12 @@ const ContentManager = ({ title, endpoint, fields }) => {
 
     const fetchItems = async () => {
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}?admin=true`);
+            const token = localStorage.getItem('adminToken');
+            const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}?admin=true`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             const data = await res.json();
             setItems(data);
         } catch (err) {
@@ -53,9 +58,13 @@ const ContentManager = ({ title, endpoint, fields }) => {
                 dataToSave.tags = [];
             }
 
+            const token = localStorage.getItem('adminToken');
             const res = await fetch(url, {
                 method,
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(dataToSave)
             });
             if (res.ok) {
@@ -75,6 +84,25 @@ const ContentManager = ({ title, endpoint, fields }) => {
         }
     };
 
+    // Helper function to get nested value from object
+    const getNestedValue = (obj, path) => {
+        return path.split('.').reduce((current, key) => current?.[key], obj);
+    };
+
+    // Helper function to set nested value in object
+    const setNestedValue = (obj, path, value) => {
+        const keys = path.split('.');
+        const result = { ...obj };
+        let current = result;
+        for (let i = 0; i < keys.length - 1; i++) {
+            if (!current[keys[i]]) current[keys[i]] = {};
+            current[keys[i]] = { ...current[keys[i]] };
+            current = current[keys[i]];
+        }
+        current[keys[keys.length - 1]] = value;
+        return result;
+    };
+
     const handleEdit = (item) => {
         console.log('Editing item:', item);
         // Reset source view mode for all fields
@@ -88,6 +116,10 @@ const ContentManager = ({ title, endpoint, fields }) => {
             itemToEdit.tags = itemToEdit.tags.join(', ');
         }
 
+        // Ensure nested objects exist for SEO and RAG
+        if (!itemToEdit.seo) itemToEdit.seo = {};
+        if (!itemToEdit.rag) itemToEdit.rag = {};
+
         setFormData(itemToEdit);
         setEditingId(item._id);
     };
@@ -95,7 +127,13 @@ const ContentManager = ({ title, endpoint, fields }) => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure?')) return;
         try {
-            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}/${id}`, { method: 'DELETE' });
+            const token = localStorage.getItem('adminToken');
+            await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/${endpoint}/${id}`, { 
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             fetchItems();
         } catch (err) {
             console.error('Failed to delete item', err);
@@ -117,10 +155,10 @@ const ContentManager = ({ title, endpoint, fields }) => {
                             <label>{field.label}</label>
                             {field.type === 'textarea' ? (
                                 <textarea
-                                    value={formData[field.name] || ''}
+                                    value={getNestedValue(formData, field.name) || ''}
                                     onChange={e => {
                                         const val = e.target.value;
-                                        setFormData(prev => ({ ...prev, [field.name]: val }));
+                                        setFormData(prev => setNestedValue(prev, field.name, val));
                                     }}
                                 />
                             ) : field.type === 'richtext' ? (
@@ -137,15 +175,15 @@ const ContentManager = ({ title, endpoint, fields }) => {
                                     </div>
                                     {isSourceView[field.name] ? (
                                         <textarea
-                                            value={formData[field.name] || ''}
-                                            onChange={e => setFormData({ ...formData, [field.name]: e.target.value })}
+                                            value={getNestedValue(formData, field.name) || ''}
+                                            onChange={e => setFormData(prev => setNestedValue(prev, field.name, e.target.value))}
                                             style={{ height: '300px', fontFamily: 'monospace' }}
                                         />
                                     ) : (
                                         <ReactQuill
                                             theme="snow"
-                                            value={formData[field.name] || ''}
-                                            onChange={(value) => setFormData({ ...formData, [field.name]: value })}
+                                            value={getNestedValue(formData, field.name) || ''}
+                                            onChange={(value) => setFormData(prev => setNestedValue(prev, field.name, value))}
                                             modules={quillModules}
                                         />
                                     )}
@@ -153,17 +191,37 @@ const ContentManager = ({ title, endpoint, fields }) => {
                             ) : field.type === 'checkbox' ? (
                                 <input
                                     type="checkbox"
-                                    checked={formData[field.name] || false}
-                                    onChange={e => setFormData({ ...formData, [field.name]: e.target.checked })}
+                                    checked={getNestedValue(formData, field.name) || false}
+                                    onChange={e => setFormData(prev => setNestedValue(prev, field.name, e.target.checked))}
                                     style={{ width: 'auto', marginRight: '1rem' }}
                                 />
+                            ) : field.type === 'number' ? (
+                                <input
+                                    type="number"
+                                    value={getNestedValue(formData, field.name) || ''}
+                                    onChange={e => {
+                                        const val = e.target.value === '' ? '' : Number(e.target.value);
+                                        setFormData(prev => setNestedValue(prev, field.name, val));
+                                    }}
+                                />
+                            ) : field.type === 'select' ? (
+                                <select
+                                    value={getNestedValue(formData, field.name) || ''}
+                                    onChange={e => setFormData(prev => setNestedValue(prev, field.name, e.target.value))}
+                                    style={{ width: '100%', padding: '0.75rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'white' }}
+                                >
+                                    <option value="">Select...</option>
+                                    {field.options?.map(option => (
+                                        <option key={option} value={option}>{option}</option>
+                                    ))}
+                                </select>
                             ) : (
                                 <input
                                     type={field.type || 'text'}
-                                    value={formData[field.name] || ''}
+                                    value={getNestedValue(formData, field.name) || ''}
                                     onChange={e => {
                                         const val = e.target.value;
-                                        setFormData(prev => ({ ...prev, [field.name]: val }));
+                                        setFormData(prev => setNestedValue(prev, field.name, val));
                                     }}
                                 />
                             )}

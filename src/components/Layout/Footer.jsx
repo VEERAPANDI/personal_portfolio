@@ -71,10 +71,10 @@ const Footer = () => {
                     <div className="footer-social-wrapper" style={{ textAlign: 'right' }}>
                         <h4>Connect With Me</h4>
                         <div className="social-links" style={{ display: 'flex', gap: '1.5rem', justifyContent: 'flex-end', marginTop: '1rem' }}>
-                            <a href="https://github.com" target="_blank" rel="noopener noreferrer"><Github className="social-icon" /></a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><Linkedin className="social-icon" /></a>
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><Twitter className="social-icon" /></a>
-                            <a href="mailto:contact@example.com"><Mail className="social-icon" /></a>
+                            <a href="https://github.com/VEERAPANDI" target="_blank" rel="noopener noreferrer"><Github className="social-icon" /></a>
+                            <a href="https://www.linkedin.com/in/veerapandi-l-520596111" target="_blank" rel="noopener noreferrer"><Linkedin className="social-icon" /></a>
+                            <a href="https://twitter.com/veerapandi97" target="_blank" rel="noopener noreferrer"><Twitter className="social-icon" /></a>
+                            <a href="mailto:veerapandideveloper@gmail.com"><Mail className="social-icon" /></a>
                         </div>
                     </div>
                 </div>

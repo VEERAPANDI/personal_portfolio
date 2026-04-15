@@ -16,7 +16,12 @@ const ContactManager = () => {
 
     const fetchContacts = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact`);
+            const token = localStorage.getItem('adminToken');
+            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             const data = await response.json();
             setContacts(data);
             setLoading(false);
@@ -28,8 +33,12 @@ const ContactManager = () => {
 
     const toggleRead = async (id) => {
         try {
+            const token = localStorage.getItem('adminToken');
             await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact/${id}/read`, {
                 method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
             fetchContacts();
         } catch (err) {
@@ -41,8 +50,12 @@ const ContactManager = () => {
         if (!window.confirm('Are you sure you want to delete this contact?')) return;
 
         try {
+            const token = localStorage.getItem('adminToken');
             await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/contact/${id}`, {
                 method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
             fetchContacts();
         } catch (err) {

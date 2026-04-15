@@ -1,19 +1,8 @@
 import React from 'react';
 import ContentManager from './ContentManager';
+import ProjectManagerWithImagePicker from './ProjectManager';
 
-export const ProjectManager = () => (
-    <ContentManager
-        title="Projects"
-        endpoint="projects"
-        fields={[
-            { name: 'title', label: 'Project Name' },
-            { name: 'description', label: 'Description', type: 'textarea' },
-            { name: 'image', label: 'Project Image URL' },
-            { name: 'link', label: 'Project Link' },
-            { name: 'tags', label: 'Technologies (comma separated)' }
-        ]}
-    />
-);
+export { ProjectManagerWithImagePicker as ProjectManager };
 
 export const ExperienceManager = () => (
     <ContentManager
@@ -43,20 +32,6 @@ export const SkillManager = () => (
     />
 );
 
-export const BlogManager = () => (
-    <ContentManager
-        title="Blog Posts"
-        endpoint="blog"
-        fields={[
-            { name: 'title', label: 'Title' },
-            { name: 'slug', label: 'Slug (URL friendly)' },
-            { name: 'excerpt', label: 'Excerpt', type: 'textarea' },
-            { name: 'image', label: 'Feature Image URL (or leave blank for AI)' },
-            { name: 'imageKeyword', label: 'AI Image Keyword (e.g. "coding", "robot")' },
-            { name: 'content', label: 'Content (Rich Text)', type: 'richtext' },
-            { name: 'tags', label: 'Tags (comma separated)' },
-            { name: 'isPublished', label: 'Published', type: 'checkbox' },
-            { name: 'readTime', label: 'Read Time' }
-        ]}
-    />
-);
+import BlogManagerWithImagePicker from './BlogManager';
+
+export { BlogManagerWithImagePicker as BlogManager };

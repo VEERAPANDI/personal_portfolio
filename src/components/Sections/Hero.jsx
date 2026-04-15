@@ -25,11 +25,11 @@ const Hero = () => {
         <section className="hero">
             <div className="container hero-container">
                 <div className="hero-content">
-                    <span className="hero-greeting">I'm Veerapandi Lakshmanan</span>
+                    <span className="hero-greeting">👋 Hello, I'm</span>
                     <h1 className="hero-title">
                         <span className="text-gradient">Veerapandi Lakshmanan</span>
                     </h1>
-                    <p className="hero-subtitle">Senior Web Developer</p>
+                    <p className="hero-subtitle">Senior Web Application Developer</p>
                     <div className="hero-cta">
                         <button className="btn-primary">View Portfolio</button>
                         <button onClick={handleResumeDownload} className="btn-secondary">Download Resume</button>
