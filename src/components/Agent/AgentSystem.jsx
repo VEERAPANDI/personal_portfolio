@@ -18,7 +18,7 @@ const AgentSystem = () => {
     const [messages, setMessages] = useState([
         {
             id: 1,
-            text: "Hi! 👋 I'm the AI assistant for **Veerapandi's** portfolio. Ask me anything or tap a quick action below!",
+            text: "Hi! 👋 I'm **Veerapandi's AI Assistant**. Ask me about his experience, projects, or technical skills!",
             sender: 'agent',
             type: 'greeting'
         }
@@ -253,7 +253,7 @@ const AgentSystem = () => {
                             <Bot size={18} />
                         </div>
                         <div className="agent-title-text">
-                            <span className="agent-name">Portfolio Agent</span>
+                            <span className="agent-name">Veerapandi's AI Agent</span>
                             <span className="agent-status">
                                 <span className="status-dot"></span>
                                 Online

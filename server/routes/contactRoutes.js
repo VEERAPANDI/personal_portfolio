@@ -17,11 +17,16 @@ router.post('/', async (req, res) => {
             if (!recaptchaToken) {
                 return res.status(400).json({ message: 'reCAPTCHA token is missing' });
             }
-            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`;
-            const verifyRes = await fetch(verifyUrl, { method: 'POST' });
+            const verifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
+            const verifyRes = await fetch(verifyUrl, { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`
+            });
             const verifyData = await verifyRes.json();
 
             if (!verifyData.success || verifyData.score < 0.5) {
+                console.error('reCAPTCHA failed:', verifyData);
                 return res.status(403).json({ message: 'reCAPTCHA verification failed. Your action was flagged as spam.' });
             }
         }
