@@ -13,10 +13,16 @@ const About = () => {
                         <h2 className="section-title">About Me</h2>
                         <div className="about-text">
                             <p className="about-paragraph">
-                                A self-motivated and results-driven <span className="highlight-text">Web Developer</span> with 5 years of comprehensive experience, including 2 years specializing in Blockchain development.
+                                A self-motivated and results-driven <span className="highlight-text">Full Stack Developer</span> with 5 years of comprehensive experience, including 2 years specializing in Blockchain/​Web3 development.
                             </p>
+                            <p className="about-paragraph">Expertise in designing scalable backend architectures, REST APIs, Orderbook
+                                trading systems, and cloud-based Saas platforms. Experienced in leading development teams, managing
+                                deployments, and delivering high-performance applications.</p>
                             <p className="about-paragraph">
-                                Proficient in full-stack web technologies and capable of designing and deploying cutting-edge crypto applications. Proven expertise in building sophisticated platforms such as <span className="highlight-text">Orderbook systems, and secure payment gateway integrations</span>.
+                                Recently expanded into AI-powered applications,
+                                Python, LLM, Vector Databases, and DevOps. Passionate about building scalable backend infrastructure and
+                                modern full-stack applications.
+
                             </p>
                             {/* <p className="about-paragraph">
                                 Seeking an opportunity to leverage advanced skills and leadership to deliver high-impact web and blockchain solutions.

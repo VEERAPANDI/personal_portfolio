@@ -29,9 +29,9 @@ const Hero = () => {
                     <h1 className="hero-title">
                         <span className="text-gradient">Veerapandi Lakshmanan</span>
                     </h1>
-                    <p className="hero-subtitle">Senior Web Application Developer</p>
+                    <p className="hero-subtitle">Full Stack Developer | Blockchain & Web3 Developer | AI Enthusiast</p>
                     <div className="hero-cta">
-                        <button className="btn-primary">View Portfolio</button>
+                        {/* <button className="btn-primary">View Portfolio</button> */}
                         <button onClick={handleResumeDownload} className="btn-secondary">Download Resume</button>
                     </div>
                 </div>
