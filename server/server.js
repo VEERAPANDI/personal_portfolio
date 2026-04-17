@@ -27,7 +27,9 @@ app.use(helmet());
 
 // Enable CORS (Stricter for production, fallback to generic based on env if needed)
 app.use(cors({
-    origin: process.env.CLIENT_URL || '*',
+    origin: function (origin, callback) {
+        callback(null, origin || true);
+    },
     credentials: true
 }));
 
