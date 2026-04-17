@@ -21,7 +21,10 @@ router.post('/', async (req, res) => {
             const verifyRes = await fetch(verifyUrl, { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`
+                body: new URLSearchParams({
+                    secret: process.env.RECAPTCHA_SECRET_KEY,
+                    response: recaptchaToken
+                }).toString()
             });
             const verifyData = await verifyRes.json();
 
