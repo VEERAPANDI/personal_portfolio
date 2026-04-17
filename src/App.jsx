@@ -8,6 +8,7 @@ import About from './components/Sections/About'
 import Skills from './components/Sections/Skills'
 import Experience from './components/Sections/Experience'
 import Portfolio from './components/Sections/Portfolio'
+import PersonalProjectsSection from './components/Sections/PersonalProjectsSection'
 import BlogSection from './components/Sections/BlogSection'
 import Contact from './components/Sections/Contact'
 import Newsletter from './components/Sections/Newsletter'
@@ -21,6 +22,7 @@ import { ProjectManager, SkillManager, BlogManager, ExperienceManager } from './
 import NewsletterManager from './components/Admin/NewsletterManager'
 import ContactManager from './components/Admin/ContactManager'
 import ResumeDownloadManager from './components/Admin/ResumeDownloadManager'
+import PersonalProjectManager from './components/Admin/PersonalProjectManager'
 
 import PageTransition from './components/Layout/PageTransition'
 import { AnimatePresence } from 'framer-motion'
@@ -56,6 +58,7 @@ function AnimatedRoutes() {
                         <Portfolio />
                         <BlogSection />
                         <Newsletter />
+                        <PersonalProjectsSection />
                         <Contact />
                     </PageTransition>
                 } />
@@ -66,6 +69,7 @@ function AnimatedRoutes() {
                 <Route path="/admin" element={<PageTransition><Login /></PageTransition>} />
                 <Route path="/admin/dashboard" element={<PageTransition><Dashboard /></PageTransition>} />
                 <Route path="/admin/projects" element={<PageTransition><ProjectManager /></PageTransition>} />
+                <Route path="/admin/personal-projects" element={<PageTransition><PersonalProjectManager /></PageTransition>} />
                 <Route path="/admin/skills" element={<PageTransition><SkillManager /></PageTransition>} />
                 <Route path="/admin/experience" element={<PageTransition><ExperienceManager /></PageTransition>} />
                 <Route path="/admin/blogs" element={<PageTransition><BlogManager /></PageTransition>} />

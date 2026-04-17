@@ -19,5 +19,6 @@ module.exports = {
     projectRoutes: createRouter(controllers.projects),
     experienceRoutes: createRouter(controllers.experience),
     blogRoutes: createRouter(controllers.blogs),
-    messageRoutes: createRouter(controllers.messages)
+    messageRoutes: createRouter(controllers.messages),
+    personalProjectRoutes: createRouter(controllers.personalProjects)
 };

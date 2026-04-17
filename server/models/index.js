@@ -25,6 +25,23 @@ const projectSchema = mongoose.Schema({
     }
 }, { timestamps: true });
 
+const personalProjectSchema = mongoose.Schema({
+    title: { type: String, required: true },
+    description: { type: String },
+    githubLink: { type: String, required: true, unique: true },
+    language: { type: String },
+    stars: { type: Number, default: 0 },
+    homepage: { type: String }, // optional live link
+    featuredImage: {
+        optimized_image_url: { type: String, default: '' },
+        image_context_text: { type: String, default: '' },
+        original_url: { type: String, default: '' },
+        unsplash_id: { type: String, default: '' },
+        photographer: { type: String, default: '' },
+        photographer_url: { type: String, default: '' }
+    }
+}, { timestamps: true });
+
 const experienceSchema = mongoose.Schema({
     company: { type: String, required: true },
     companyWebsite: { type: String },
@@ -293,6 +310,7 @@ module.exports = {
     Newsletter: mongoose.model('Newsletter', newsletterSchema),
     Contact: mongoose.model('Contact', contactSchema),
     ResumeDownload: mongoose.model('ResumeDownload', resumeDownloadSchema),
+    PersonalProject: mongoose.model('PersonalProject', personalProjectSchema),
     // Export upsert utilities
     upsertDocument,
     upsertBlog,

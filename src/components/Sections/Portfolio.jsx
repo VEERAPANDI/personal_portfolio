@@ -44,7 +44,7 @@ const Portfolio = () => {
     return (
         <section id="projects" className="section-padding">
             <div className="container">
-                <h2 className="section-title">Personal Projects</h2>
+                <h2 className="section-title">Job Achieved Projects</h2>
                 <div className="slider-container">
                     <button className="slider-arrow left" onClick={() => scroll('left')}>
                         <ChevronLeft size={20} />

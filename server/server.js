@@ -27,7 +27,9 @@ app.use(helmet());
 
 // Enable CORS (Stricter for production, fallback to generic based on env if needed)
 app.use(cors({
-    origin: process.env.CLIENT_URL || '*',
+    origin: function (origin, callback) {
+        callback(null, origin || true);
+    },
     credentials: true
 }));
 
@@ -54,7 +56,7 @@ app.get('/', (req, res) => {
 });
 
 // Define Routes
-const { skillRoutes, projectRoutes, experienceRoutes, blogRoutes, messageRoutes } = require('./routes');
+const { skillRoutes, projectRoutes, experienceRoutes, blogRoutes, messageRoutes, personalProjectRoutes } = require('./routes');
 const adminRoutes = require('./routes/adminRoutes');
 const sitemapRoutes = require('./routes/sitemapRoutes');
 const newsletterRoutes = require('./routes/newsletterRoutes');
@@ -73,6 +75,7 @@ app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/resume', resumeRoutes);
 app.use('/api/agent', agentRoutes);
+app.use('/api/personal-projects', personalProjectRoutes);
 
 const PORT = process.env.PORT || 5000;
 
