@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Skill, Project, Experience, Blog, Message } = require('../models');
+const { Skill, Project, Experience, Blog, Message, PersonalProject } = require('../models');
 
 const factory = (Model) => ({
     getAll: async (req, res) => {
@@ -96,5 +96,6 @@ module.exports = {
         }
     },
     blogs: blogController,
-    messages: factory(Message)
+    messages: factory(Message),
+    personalProjects: factory(PersonalProject)
 };

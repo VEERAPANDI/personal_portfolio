@@ -20,8 +20,13 @@ const Dashboard = () => {
             <div className="stats-grid">
                 <div className="stat-card">
                     <h3>Manage</h3>
-                    <p>Projects</p>
+                    <p>Job Achieved Projects</p>
                     <Link to="/admin/projects" className="btn-primary" style={{ marginTop: '1rem', display: 'inline-block' }}>Edit Projects</Link>
+                </div>
+                <div className="stat-card">
+                    <h3>Manage</h3>
+                    <p>Personal Projects</p>
+                    <Link to="/admin/personal-projects" className="btn-primary" style={{ marginTop: '1rem', display: 'inline-block' }}>Edit Personal Projects</Link>
                 </div>
                 <div className="stat-card">
                     <h3>Manage</h3>

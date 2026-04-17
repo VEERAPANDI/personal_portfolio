@@ -138,7 +138,7 @@ const ProjectManager = () => {
     return (
         <div className="section-padding container admin-container">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                <h2>Manage Projects</h2>
+                <h2>Manage Job Achieved Projects</h2>
                 <button onClick={() => navigate('/admin/dashboard')} className="btn-secondary">Back to Dashboard</button>
             </div>
 
@@ -195,7 +195,7 @@ const ProjectManager = () => {
             </div>
 
             <div className="glass-panel" style={{ padding: '2rem' }}>
-                <h3>Existing Projects</h3>
+                <h3>Existing Job Achieved Projects</h3>
                 <table style={{ width: '100%', borderCollapse: 'collapse', color: 'white' }}>
                     <thead>
                         <tr style={{ textAlign: 'left', borderBottom: '1px solid var(--glass-border)' }}>

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Skill, Project, Experience, Blog } = require('../models');
+const { Skill, Project, Experience, Blog, PersonalProject } = require('../models');
 
 // Intent detection keywords mapped to categories
 const INTENTS = {
@@ -58,25 +58,49 @@ function formatSkills(skills) {
 /**
  * Format projects into a natural response  
  */
-function formatProjects(projects) {
-    if (!projects.length) return { reply: "No projects to showcase yet. Stay tuned!", type: 'text' };
+function formatProjects(projects, personalProjects) {
+    if (!projects.length && !personalProjects.length) return { reply: "No projects to showcase yet. Stay tuned!", type: 'text' };
 
-    let reply = `Here are ${projects.length} featured project${projects.length > 1 ? 's' : ''}:\n\n`;
-    projects.forEach((p, i) => {
-        reply += `**${i + 1}. ${p.title}** — ${p.description}\n`;
-    });
+    let reply = `Here are some featured projects:\n\n`;
+    
+    if (projects.length > 0) {
+        reply += `**Job Achieved Projects:**\n`;
+        projects.forEach((p, i) => {
+            reply += `${i + 1}. **${p.title}** — ${p.description}\n`;
+        });
+        reply += `\n`;
+    }
+
+    if (personalProjects.length > 0) {
+        reply += `**Personal GitHub Projects:**\n`;
+        personalProjects.forEach((p, i) => {
+            reply += `${i + 1}. **${p.title}** — ${p.description}\n`;
+        });
+    }
+
+    // Combine for the Agent UI cards
+    const combinedData = [];
+    projects.forEach(p => combinedData.push({
+        title: p.title + ' (Job Achieved)',
+        description: p.description,
+        image: p.image || p.featuredImage?.optimized_image_url,
+        link: p.link,
+        githubLink: p.githubLink,
+        tags: p.tags
+    }));
+    personalProjects.forEach(p => combinedData.push({
+        title: p.title + ' (Personal)',
+        description: p.description,
+        image: p.featuredImage?.optimized_image_url,
+        link: p.homepage,
+        githubLink: p.githubLink,
+        tags: p.language ? [p.language] : []
+    }));
 
     return {
         reply,
         type: 'projects',
-        data: projects.map(p => ({
-            title: p.title,
-            description: p.description,
-            image: p.image,
-            link: p.link,
-            githubLink: p.githubLink,
-            tags: p.tags
-        }))
+        data: combinedData
     };
 }
 
@@ -164,7 +188,8 @@ router.post('/chat', async (req, res) => {
 
             case 'projects': {
                 const projects = await Project.find().sort({ createdAt: -1 });
-                response = formatProjects(projects);
+                const personalProjects = await PersonalProject.find().sort({ createdAt: -1 });
+                response = formatProjects(projects, personalProjects);
                 break;
             }
 
