@@ -21,8 +21,9 @@ const SEO = ({
             "https://github.com/VEERAPANDI",
             "https://www.linkedin.com/in/veerapandi-l-520596111",
             "https://twitter.com/veerapandi97",
-            "veerapandideveloper@gmail.com"
+            "mailto:veerapandideveloper@gmail.com"
         ],
+        "image": image,
         "description": description
     };
 
@@ -33,6 +34,8 @@ const SEO = ({
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />
             <meta name="author" content="Veerapandi Lakshmanan" />
+            <meta name="image" content={image} />
+            <meta name="url" content={url} />
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content={type} />
