@@ -2,10 +2,10 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEO = ({
-    title = "Veerapandi Lakshmanan | Senior Web Application Developer",
-    description = "Portfolio of Veerapandi Lakshmanan, a Senior Web Application Developer specializing in building scalable and interactive digital products.",
-    keywords = "Veerapandi Lakshmanan, Web Developer, React, Frontend, Backend, Agent System, Senior Developer",
-    image = "/assets/og-image.png", // Assuming an image exists or will be added
+    title = "Veerapandi Lakshmanan - Full Stack Developer | Blockchain & Web3 Developer | AI Enthusiast",
+    description = "Portfolio of Veerapandi Lakshmanan,  I am a Full Stack Developer with over five years of experience, including more than two years in Blockchain/Web3 development. I specialize in designing scalable backend architectures, REST APIs, orderbook trading systems, and cloud-based SaaS platforms.",
+    keywords = "Veerapandi Lakshmanan, Full Stack Developer, React, Frontend, Backend, Blockchain, Web3, SaaS, SaaS Platform, Orderbook Trading System, REST API, Backend Architecture",
+    image = "https://veerapandi-dev.vercel.app/assets/og-image.png",
     url = window.location.href,
     type = "website"
 }) => {
@@ -15,11 +15,13 @@ const SEO = ({
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Veerapandi Lakshmanan",
-        "jobTitle": "Senior Web Application Developer",
-        "url": "https://veerapandi-dev.vercel.app", // Update with production URL
+        "jobTitle": "Full Stack Developer",
+        "url": "https://veerapandi-dev.vercel.app",
         "sameAs": [
-            "https://github.com/veerapandi", // Placeholder
-            "https://linkedin.com/in/veerapandi" // Placeholder
+            "https://github.com/VEERAPANDI",
+            "https://www.linkedin.com/in/veerapandi-l-520596111",
+            "https://twitter.com/veerapandi97",
+            "veerapandideveloper@gmail.com"
         ],
         "description": description
     };
