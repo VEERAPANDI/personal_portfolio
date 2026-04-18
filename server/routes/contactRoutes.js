@@ -13,12 +13,12 @@ router.post('/', async (req, res) => {
         }
 
         // Verify reCAPTCHA if secret is set
-        if (process.env.RECAPTCHA_SECRET_KEY && process.env.RECAPTCHA_SECRET_KEY !== 'YOUR_RECAPTCHA_SECRET_KEY') {
+        if (process.env.RECAPTCHA_SECRET_KEY && process.env.RECAPTCHA_SECRET_KEY !== '6LdCfLwsAAAAAFPConu_E99MG0PXnxMWb9bTzTsz') {
             if (!recaptchaToken) {
                 return res.status(400).json({ message: 'reCAPTCHA token is missing' });
             }
             const verifyUrl = `https://www.google.com/recaptcha/api/siteverify`;
-            const verifyRes = await fetch(verifyUrl, { 
+            const verifyRes = await fetch(verifyUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams({
