@@ -31,7 +31,7 @@ const Hero = () => {
                         <span className="text-gradient">Veerapandi Lakshmanan</span>
                     </h1>
                     <p className="hero-subtitle">Full Stack Developer | Blockchain & Web3 Developer | AI Enthusiast</p>
-                    
+
                     <div className="hero-socials" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', marginTop: '1rem' }}>
                         <a href="https://github.com/VEERAPANDI" target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="GitHub">
                             <Github size={24} />
