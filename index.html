@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 font-family=%22monospace%22 font-weight=%22bold%22 fill=%22%234ade80%22>vp</text></svg>" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 font-family=%22monospace%22 font-weight=%22bold%22 fill=%22%234ade80%22>vp</text></svg>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Veerapandi Lakshmanan | Senior Web Application Developer</title>
   <meta name="description"
@@ -14,8 +15,9 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://veerapandi-dev.vercel.app/" />
-  <meta property="og:title" content="Veerapandi Lakshmanan | Senior Web Application Developer" />
-  <meta property="og:description" content="Portfolio of Veerapandi Lakshmanan, a Senior Web Application Developer specializing in building scalable and interactive digital products." />
+  <meta property="og:title" content="Veerapandi Lakshmanan | Web Application Developer" />
+  <meta property="og:description"
+    content="Portfolio of Veerapandi Lakshmanan, Web Application Developer specializing in building scalable and interactive digital products." />
   <meta property="og:image" content="https://veerapandi-dev.vercel.app/assets/og-image.png" />
   <meta property="og:site_name" content="Veerapandi Lakshmanan Portfolio" />
 
@@ -23,7 +25,8 @@
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://veerapandi-dev.vercel.app/" />
   <meta property="twitter:title" content="Veerapandi Lakshmanan | Senior Web Application Developer" />
-  <meta property="twitter:description" content="Portfolio of Veerapandi Lakshmanan, a Senior Web Application Developer specializing in building scalable and interactive digital products." />
+  <meta property="twitter:description"
+    content="Portfolio of Veerapandi Lakshmanan, a Senior Web Application Developer specializing in building scalable and interactive digital products." />
   <meta property="twitter:image" content="https://veerapandi-dev.vercel.app/assets/og-image.png" />
 
   <!-- Highlight.js for Code Blocks in Blog Editor -->
@@ -38,7 +41,7 @@
   </script>
   <!-- Google Analytics snippet logic. Wrapped in a function for GDPR consent -->
   <script>
-    window.loadGoogleAnalytics = function() {
+    window.loadGoogleAnalytics = function () {
       if (window.gaLoaded) return;
       const gaTrackingId = "%VITE_GA_TRACKING_ID%";
       if (gaTrackingId && !gaTrackingId.startsWith('%')) {
@@ -71,10 +74,10 @@
     const tawkPropertyId = "%VITE_TAWK_PROPERTY_ID%";
     const tawkWidgetId = "%VITE_TAWK_WIDGET_ID%";
     const widgetId = tawkWidgetId && !tawkWidgetId.startsWith('%') ? tawkWidgetId : 'default';
-    
+
     if (tawkPropertyId && !tawkPropertyId.startsWith('%')) {
       var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-      
+
       // Force position to bottom-left as requested
       Tawk_API.customStyle = {
         visibility: {
