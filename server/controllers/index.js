@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const he = require('he');
 const { Skill, Project, Experience, Blog, Message, PersonalProject } = require('../models');
 
 const factory = (Model) => ({
@@ -73,8 +74,19 @@ const blogController = {
                 { $inc: { visits: 1 } },
                 { new: true }
             );
-            if (!doc) return res.status(404).json({ message: 'Not Found' });
-            res.json(doc);
+            if (!doc) {
+                return res.status(404).json({
+                    message: 'Not Found'
+                });
+            }
+
+            // Convert mongoose document to object
+            const result = doc.toObject();
+
+            // Decode HTML entities
+            result.content = he.decode(result.content);
+
+            res.json(result);
         } catch (err) {
             res.status(500).json({ message: err.message });
         }
