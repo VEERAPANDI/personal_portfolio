@@ -1,6 +1,8 @@
-import React from 'react'
+import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { HelmetProvider, Helmet } from 'react-helmet-async'
+
+// Public Components
 import Navbar from './components/Layout/Navbar'
 import Footer from './components/Layout/Footer'
 import Hero from './components/Sections/Hero'
@@ -16,13 +18,18 @@ import NotFound from './components/Sections/NotFound'
 import AgentSystem from './components/Agent/AgentSystem'
 import BlogPage from './components/Blog/BlogPage'
 import BlogPost from './components/Blog/BlogPost'
-import Login from './components/Admin/Login'
-import Dashboard from './components/Admin/Dashboard'
-import { ProjectManager, SkillManager, BlogManager, ExperienceManager } from './components/Admin/Managers'
-import NewsletterManager from './components/Admin/NewsletterManager'
-import ContactManager from './components/Admin/ContactManager'
-import ResumeDownloadManager from './components/Admin/ResumeDownloadManager'
-import PersonalProjectManager from './components/Admin/PersonalProjectManager'
+
+// Admin Components (Lazy Loaded)
+const Login = lazy(() => import('./components/Admin/Login'));
+const Dashboard = lazy(() => import('./components/Admin/Dashboard'));
+const ProjectManager = lazy(() => import('./components/Admin/Managers').then(module => ({ default: module.ProjectManager })));
+const SkillManager = lazy(() => import('./components/Admin/Managers').then(module => ({ default: module.SkillManager })));
+const BlogManager = lazy(() => import('./components/Admin/Managers').then(module => ({ default: module.BlogManager })));
+const ExperienceManager = lazy(() => import('./components/Admin/Managers').then(module => ({ default: module.ExperienceManager })));
+const NewsletterManager = lazy(() => import('./components/Admin/NewsletterManager'));
+const ContactManager = lazy(() => import('./components/Admin/ContactManager'));
+const ResumeDownloadManager = lazy(() => import('./components/Admin/ResumeDownloadManager'));
+const PersonalProjectManager = lazy(() => import('./components/Admin/PersonalProjectManager'));
 
 import PageTransition from './components/Layout/PageTransition'
 import { AnimatePresence } from 'framer-motion'
@@ -47,39 +54,41 @@ function AnimatedRoutes() {
 
     return (
         <AnimatePresence mode="wait">
-            <Routes location={location} key={location.pathname}>
-                <Route path="/" element={
-                    <PageTransition>
-                        <SEO />
-                        <Hero />
-                        <About />
-                        <Skills />
-                        <Experience />
-                        <Portfolio />
-                        <BlogSection />
-                        <Newsletter />
-                        <PersonalProjectsSection />
-                        <Contact />
-                    </PageTransition>
-                } />
-                <Route path="/blog" element={<PageTransition><SEO title="Blog | Veerapandi Lakshmanan" description="Read the latest articles on web development, AI, and software engineering by Veerapandi Lakshmanan." /><BlogPage /></PageTransition>} />
-                <Route path="/blog/:id" element={<PageTransition><SEO type="article" /><BlogPost /></PageTransition>} />
+            <Suspense fallback={<div className="loading-screen section-padding"><div className="container"><h2>Loading...</h2></div></div>}>
+                <Routes location={location} key={location.pathname}>
+                    <Route path="/" element={
+                        <PageTransition>
+                            <SEO />
+                            <Hero />
+                            <About />
+                            <Skills />
+                            <Experience />
+                            <Portfolio />
+                            <BlogSection />
+                            <Newsletter />
+                            <PersonalProjectsSection />
+                            <Contact />
+                        </PageTransition>
+                    } />
+                    <Route path="/blog" element={<PageTransition><SEO title="Blog | Veerapandi Lakshmanan" description="Read the latest articles on web development, AI, and software engineering by Veerapandi Lakshmanan." /><BlogPage /></PageTransition>} />
+                    <Route path="/blog/:id" element={<PageTransition><SEO type="article" /><BlogPost /></PageTransition>} />
 
-                {/* Admin Routes */}
-                <Route path="/admin" element={<PageTransition><Login /></PageTransition>} />
-                <Route path="/admin/dashboard" element={<PageTransition><Dashboard /></PageTransition>} />
-                <Route path="/admin/projects" element={<PageTransition><ProjectManager /></PageTransition>} />
-                <Route path="/admin/personal-projects" element={<PageTransition><PersonalProjectManager /></PageTransition>} />
-                <Route path="/admin/skills" element={<PageTransition><SkillManager /></PageTransition>} />
-                <Route path="/admin/experience" element={<PageTransition><ExperienceManager /></PageTransition>} />
-                <Route path="/admin/blogs" element={<PageTransition><BlogManager /></PageTransition>} />
-                <Route path="/admin/newsletter" element={<PageTransition><NewsletterManager /></PageTransition>} />
-                <Route path="/admin/contacts" element={<PageTransition><ContactManager /></PageTransition>} />
-                <Route path="/admin/resume-downloads" element={<PageTransition><ResumeDownloadManager /></PageTransition>} />
+                    {/* Admin Routes */}
+                    <Route path="/admin" element={<PageTransition><Login /></PageTransition>} />
+                    <Route path="/admin/dashboard" element={<PageTransition><Dashboard /></PageTransition>} />
+                    <Route path="/admin/projects" element={<PageTransition><ProjectManager /></PageTransition>} />
+                    <Route path="/admin/personal-projects" element={<PageTransition><PersonalProjectManager /></PageTransition>} />
+                    <Route path="/admin/skills" element={<PageTransition><SkillManager /></PageTransition>} />
+                    <Route path="/admin/experience" element={<PageTransition><ExperienceManager /></PageTransition>} />
+                    <Route path="/admin/blogs" element={<PageTransition><BlogManager /></PageTransition>} />
+                    <Route path="/admin/newsletter" element={<PageTransition><NewsletterManager /></PageTransition>} />
+                    <Route path="/admin/contacts" element={<PageTransition><ContactManager /></PageTransition>} />
+                    <Route path="/admin/resume-downloads" element={<PageTransition><ResumeDownloadManager /></PageTransition>} />
 
-                {/* 404 Catch All Route */}
-                <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
-            </Routes>
+                    {/* 404 Catch All Route */}
+                    <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+                </Routes>
+            </Suspense>
         </AnimatePresence>
     );
 }

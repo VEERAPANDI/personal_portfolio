@@ -52,7 +52,7 @@ const CookieBanner = () => {
                                 </div>
                                 <h3>Cookie Consent</h3>
                             </div>
-                            <button onClick={handleDecline} className="cookie-close-btn">
+                            <button onClick={handleDecline} className="cookie-close-btn" aria-label="Close Cookie Banner">
                                 <X size={20} />
                             </button>
                         </div>

@@ -54,7 +54,7 @@ const Footer = () => {
                         </div>
                         <h3>Veerapandi Lakshmanan</h3>
                         <p>Senior Web Developer building intelligent solutions.</p>
-                        <button onClick={handleResumeDownload} className="btn-secondary" style={{ marginTop: '1.5rem', display: 'inline-block' }}>Download Resume</button>
+                        <button onClick={handleResumeDownload} className="btn-secondary" style={{ marginTop: '1.5rem', display: 'inline-block' }} aria-label="Download Resume PDF">Download Resume</button>
                     </div>
 
                     <div className="footer-newsletter">
@@ -64,22 +64,25 @@ const Footer = () => {
                         <form className="newsletter-form" style={{ marginTop: '0', display: 'flex', flexDirection: 'column', gap: '0.5rem' }} onSubmit={handleNewsletterSubmit}>
                             <input type="text" placeholder="Your Name" value={newsletterName} onChange={(e) => setNewsletterName(e.target.value)} required />
                             <input type="email" placeholder="Email Address" value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)} required />
-                            <button type="submit" className="btn-primary">Subscribe</button>
+                            <button type="submit" className="btn-primary" aria-label="Subscribe to newsletter">Subscribe</button>
                         </form>
                     </div>
 
                     <div className="footer-social-wrapper" style={{ textAlign: 'right' }}>
                         <h4>Connect With Me</h4>
                         <div className="social-links" style={{ display: 'flex', gap: '1.5rem', justifyContent: 'flex-end', marginTop: '1rem' }}>
-                            <a href="https://github.com/VEERAPANDI" target="_blank" rel="noopener noreferrer"><Github className="social-icon" /></a>
-                            <a href="https://www.linkedin.com/in/veerapandi-l-520596111" target="_blank" rel="noopener noreferrer"><Linkedin className="social-icon" /></a>
-                            <a href="https://twitter.com/veerapandi97" target="_blank" rel="noopener noreferrer"><Twitter className="social-icon" /></a>
-                            <a href="mailto:veerapandideveloper@gmail.com"><Mail className="social-icon" /></a>
+                            <a href="https://github.com/VEERAPANDI" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><Github className="social-icon" /></a>
+                            <a href="https://www.linkedin.com/in/veerapandi-l-520596111" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><Linkedin className="social-icon" /></a>
+                            <a href="https://twitter.com/veerapandi97" target="_blank" rel="noopener noreferrer" aria-label="Twitter Profile"><Twitter className="social-icon" /></a>
+                            <a href="mailto:veerapandideveloper@gmail.com" aria-label="Email Me"><Mail className="social-icon" /></a>
                         </div>
                     </div>
                 </div>
-                <div className="footer-bottom" style={{ marginTop: '4rem' }}>
+                <div className="footer-bottom" style={{ marginTop: '4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--glass-border)', paddingTop: '2rem' }}>
                     <p>&copy; {new Date().getFullYear()} Veerapandi Lakshmanan. All rights reserved.</p>
+                    <div className="footer-bottom-links">
+                        <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', hover: { color: 'var(--accent-primary)' } }}>Sitemap</a>
+                    </div>
                 </div>
             </div>
         </footer>
