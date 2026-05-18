@@ -238,6 +238,7 @@ const AgentSystem = () => {
                 className={`agent-trigger ${isOpen ? 'hidden' : ''}`}
                 onClick={() => setIsOpen(true)}
                 id="agent-trigger-btn"
+                aria-label="Open AI Assistant"
             >
                 <div className="trigger-pulse"></div>
                 <Sparkles size={24} />
@@ -260,7 +261,7 @@ const AgentSystem = () => {
                             </span>
                         </div>
                     </div>
-                    <button className="close-agent" onClick={() => setIsOpen(false)} id="agent-close-btn">
+                    <button className="close-agent" onClick={() => setIsOpen(false)} id="agent-close-btn" aria-label="Close AI Assistant">
                         <X size={18} />
                     </button>
                 </div>

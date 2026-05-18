@@ -3,7 +3,7 @@ import './Sections.css';
 
 const knowledge = {
     skills: "My core stack includes React, Node.js, Express, MongoDB, Postgres, and Python for AI Agent integrations.",
-    about: "I'm a Senior Web Application Developer with over 5 years of experience building scalable products and AI solutions.",
+    about: "I'm a Full Stack Developer with over 5 years of experience building scalable products and AI solutions.",
     contact: "You can reach me at contact@example.com or use the contact form below!"
 };
 

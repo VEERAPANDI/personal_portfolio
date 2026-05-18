@@ -48,8 +48,8 @@ const Hero = () => {
                     </div>
 
                     <div className="hero-cta">
-                        <a href="#contact" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>Contact Me</a>
-                        <button onClick={handleResumeDownload} className="btn-secondary">Download Resume</button>
+                        <a href="#contact" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} aria-label="Scroll to Contact section">Contact Me</a>
+                        <button onClick={handleResumeDownload} className="btn-secondary" aria-label="Download Resume PDF">Download Resume</button>
                     </div>
                 </div>
                 <div className="hero-visual">

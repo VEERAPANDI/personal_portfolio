@@ -52,6 +52,7 @@
     color: var(--text-primary);
     border: 1px solid var(--glass-border);
     transition: all 0.3s ease;
+    padding: 10px;
 }
 
 .social-icon:hover {
@@ -567,7 +568,8 @@
     /* Vertical layout: image top, text bottom */
     justify-content: flex-start;
     gap: 1.5rem;
-    height: 100%; /* Take full height of slider item */
+    height: 100%;
+    /* Take full height of slider item */
 }
 
 .modern-card:hover {
@@ -649,7 +651,8 @@
     z-index: 1;
     flex-shrink: 0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    order: -1; /* Puts the image at the top of the card */
+    order: -1;
+    /* Puts the image at the top of the card */
 }
 
 .btn-join {

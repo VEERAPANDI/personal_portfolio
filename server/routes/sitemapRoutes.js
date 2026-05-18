@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/sitemap.xml', async (req, res) => {
   try {
     const blogs = await Blog.find({}, 'slug updatedAt');
-    const baseUrl = 'http://localhost:5173'; // Assuming frontend URL
+    const baseUrl = process.env.CLIENT_URL || (req.headers.origin) || `${req.protocol}://${req.get('host')}`;
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

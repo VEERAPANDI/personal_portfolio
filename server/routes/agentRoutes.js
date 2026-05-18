@@ -215,7 +215,7 @@ router.post('/chat', async (req, res) => {
 
             case 'about': {
                 response = {
-                    reply: "I'm **Veerapandi Lakshmanan**, a Senior Web Application Developer with **8+ years** of experience. I specialize in building scalable, AI-powered web applications using cutting-edge technologies like **LLMs, Vector Databases, and Agentic Frameworks**.\n\nI combine expertise in **Laravel, React, Node.js**, and modern cloud architectures to deliver premium digital products. My passion lies at the intersection of robust backend systems and intuitive frontends.\n\n🚀 **50+ projects** completed and counting!",
+                    reply: "I'm **Veerapandi Lakshmanan**, a Full Stack Developer with **8+ years** of experience. I specialize in building scalable, AI-powered web applications using cutting-edge technologies like **LLMs, Vector Databases, and Agentic Frameworks**.\n\nI combine expertise in **Laravel, React, Node.js**, and modern cloud architectures to deliver premium digital products. My passion lies at the intersection of robust backend systems and intuitive frontends.\n\n🚀 **50+ projects** completed and counting!",
                     type: 'about'
                 };
                 break;

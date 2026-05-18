@@ -1,5 +1,20 @@
 {
+    "headers": [
+        {
+            "source": "/sitemap.xml",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, s-maxage=86400, stale-while-revalidate=43200"
+                }
+            ]
+        }
+    ],
     "rewrites": [
+        {
+            "source": "/sitemap.xml",
+            "destination": "https://personal-portfolio-ugk0.onrender.com/sitemap.xml"
+        },
         {
             "source": "/(.*)",
             "destination": "/index.html"
